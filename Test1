@@ -1,0 +1,27 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def calcAB(x,y):
+    n = len(x)
+    sumX,sumY,sumXY,sumXX =0,0,0,0
+    for i in range(0,n):
+        sumX  += x[i]
+        sumY  += y[i]
+        sumXX += x[i]*x[i]
+        sumXY += x[i]*y[i]
+    a = (n*sumXY -sumX*sumY)/(n*sumXX -sumX*sumX)
+    b = (sumXX*sumY - sumX*sumXY)/(n*sumXX-sumX*sumX)
+    return a,b,
+
+xi = [1233.06,1514.32,2007.01,2456.58,2862.96,3325.44,3762.98,3945.31,4262.65,4561.93,4880.23,5490.17,
+5993.45,7683.04,9328.62,12628.98,14926.09,16918.06,19312.28,22339.46,28724.06,31970.22,35135.56,33983.02
+]
+yi = [7.56,10.98,10.98,10.98,7.47,5.67,3.78,2.25,2.25,2.25,1.98,1.98,2.25,2.25,2.52,3.60,3.06,2.25,
+2.63,3.50,3.00,3.00,2.75,2.05]
+a,b=calcAB(xi,yi)
+print("y = %10.5fx + %10.5f" %(a,b))
+x = np.linspace(0,10)
+y = a * x + b
+plt.plot(x,y)
+plt.scatter(xi,yi)
+plt.show()
